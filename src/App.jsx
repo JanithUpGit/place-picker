@@ -15,7 +15,7 @@ const storedPlaces = storedIds.map(id =>
 function App() {
 
 
-  const [modalIsOpen,setMdalIsOpen] = useState(false);
+  const [modalIsOpen, setMdalIsOpen] = useState(false);
   const modal = useRef();
   const selectedPlace = useRef();
   const [availablePlaces, setAvailablePlaces] = useState([]);
@@ -54,6 +54,8 @@ function App() {
       const place = AVAILABLE_PLACES.find((place) => place.id === id);
       return [place, ...prevPickedPlaces];
     });
+
+
     const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
     if (storedIds.indexOf(id) === -1) {
       localStorage.setItem(
@@ -68,8 +70,7 @@ function App() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
-    modal.current.close();
-
+    setMdalIsOpen(false);
 
     const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
     localStorage.setItem(
