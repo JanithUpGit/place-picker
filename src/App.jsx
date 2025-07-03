@@ -15,7 +15,7 @@ const storedPlaces = storedIds.map(id =>
 function App() {
 
 
-
+  const [modalIsOpen,setMdalIsOpen] = useState(false);
   const modal = useRef();
   const selectedPlace = useRef();
   const [availablePlaces, setAvailablePlaces] = useState([]);
@@ -37,16 +37,13 @@ function App() {
   }, []
   );
 
-
-
-
   function handleStartRemovePlace(id) {
-    modal.current.open();
+    setMdalIsOpen(true);
     selectedPlace.current = id;
   }
 
   function handleStopRemovePlace() {
-    modal.current.close();
+    setMdalIsOpen(false);
   }
 
   function handleSelectPlace(id) {
@@ -83,7 +80,7 @@ function App() {
 
   return (
     <>
-      <Modal ref={modal}>
+      <Modal open={modalIsOpen}>
         <DeleteConfirmation
           onCancel={handleStopRemovePlace}
           onConfirm={handleRemovePlace}
